@@ -6,9 +6,9 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 paper_title:  Coordinated regulation by lncRNAs results in tight lncRNA–target couplings
-journal: Proc Natl Acad Sci U S A\
-publication_date: "2024-04-05"\
-doi: 10.1073/pnas.2506321122\
+journal: Cell Genomics\
+publication_date: "2024-07-75"\
+doi: 10.1016/j.xgen.2025.100927\
 series_accession: GSE263343\
 bioproject: PRJNA1096299\
 domain: rna_seq\
@@ -21,18 +21,18 @@ sample_count: 4\
 sra_runs_total: 8\
 \
 samples:\
-  Young_1:\
-    condition: minus_dox\
-    sra_runs: [SRX7865899]\
-  Young_2:\
-    condition: plus_dox\
-    sra_runs: [SRX7865900]\
-  Senescent_1:\
-    condition: minus_dox\
-    sra_runs: [SRX7865901]\
-  Senescent_2:\
-    condition: plus_dox\
-    sra_runs: [SRX7865902]\
+  ECC1_NT_L1:\
+    condition: siRNA_ECC-1_NT_Rep1_L1\
+    sra_runs: [SRX24155225]\
+  ECC1_NT_L2:\
+    condition: siRNA_ECC-1_NT_Rep1_L2\
+    sra_runs: [SRX24155226]\
+  H460_NCI_L1:\
+    condition: siRNA_NCI-H460_NT_Rep1_L1\
+    sra_runs: [SRX24155239]\
+  H460_NCI_L2:\
+    condition: siRNA_NCI-H460_NT_Rep1_L2\
+    sra_runs: [SRX24155240]\
 \
 paths:\
   fastq: fastq/\
