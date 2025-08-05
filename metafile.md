@@ -56,8 +56,3 @@ paths:\
     STAR_index: STAR_index/hg19/genome\
     annotation_gtf: gencode.v16.annotation.gtf\
 \
-workflow:\
-  threads: 16\
-  aligner: STAR\
-  quantifier: normalizedcounts\
-notes: "Genome wide expression analysis of young vs senescent BJ fibroblasts"}
