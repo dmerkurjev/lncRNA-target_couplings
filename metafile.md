@@ -33,6 +33,18 @@ samples:\
   H460_NCI_L2:\
     condition: siRNA_NCI-H460_NT_Rep1_L2\
     sra_runs: [SRX24155240]\
+  PC-3_NT_L1:\
+    condition: siRNA_PC-3_NT_Rep1_L1\
+    sra_runs: [SRX24155254]\
+  PC-3_NT_L2:\
+    condition: siRNA_PC-3_NT_Rep1_L2\
+    sra_runs: [SRX24155255]\
+  PC-3_siDICER1_L1:\
+    condition: siRNA_PC-3_siDICER1_Rep1_L1\
+    sra_runs: [SRX24155181]\
+  PC-3_siDICER1_L2:\
+    condition: siRNA_PC-3_siDICER1_Rep1_L2\
+    sra_runs: [SRX24155182]\
 \
 paths:\
   fastq: fastq/\
@@ -41,8 +53,8 @@ paths:\
   logs: logs/\
   qc: qc/\
   reference:\
-    hisat2_index: STAR_index/hg38/genome\
-    annotation_gtf: gencode.v48.annotation.gtf\
+    STAR_index: STAR_index/hg19/genome\
+    annotation_gtf: gencode.v16.annotation.gtf\
 \
 workflow:\
   threads: 16\
