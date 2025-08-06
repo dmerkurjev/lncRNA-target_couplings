@@ -1,4 +1,4 @@
-lncRNA Analysis — Preprocessing & Analysis
+LncRNA Analysis — Preprocessing & Analysis
 
 This repository contains an end-to-end workflow for RNA-seq analysis of lncRNAs results in tight lncRNA–target couplings.
 This is an analysis of a high-throughput parallel CRISPRi screening platform that combines live-cell imaging with a scalable
