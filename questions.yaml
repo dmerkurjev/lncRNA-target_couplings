@@ -42,3 +42,8 @@ questions:\
     stage: differential_expression\
     text: "Which gene is ranked 4th by log2 fold change (most upregulated) in siRNA_ECC-1_NT_Rep1 vs. siRNA_PC-3_siDICER1_Rep1_L1?"\
     answer_type: string_exact}
+
+  - id: q5\
+    stage: differential_expression\
+    text: "Which gene is ranked 4th by log2 fold change (most upregulated) in siRNA_ECC-1_NT_Rep1 vs. siRNA_PC-3_siDICER1_Rep1_L1?"\
+    answer_type: string_exact}
