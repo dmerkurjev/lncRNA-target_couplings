@@ -13,38 +13,47 @@ mkdir -p "${PROJECT_DIR}"/{raw,fastq,aligned,counts,logs,qc,STAR_index}
 cd "${PROJECT_DIR}/raw"
 
 
-# Group SRA run IDs by biological sample (4 runs each)
-youngminusd=(SRX7865899)   # SRX7865899
-youngplusd=(SRX7865900)   # SRX7865900
-senescentminusd=(SRX7865901)    # SRX7865901
-senescentplusd=(SRX7865902)    # SRX7865902
+# Group SRA run IDs by biological sample 
+ECC1_L1=(SRX24155225)   # SRX24155225
+ECC1_L2=(SRX24155226)   # SRX24155226
+H460_L1=(SRX24155239)    # SRX24155239	
+H460_L2=(SRX24155240)    # SRX24155240
+PC-3_L1=(SRX24155254)   # SRX24155254	
+PC-3_L2=(SRX24155255)   # SRX24155255
+PC_3_L1_siD=(SRX24155181)   # SRX24155181
+PC_3_L2_siD=(SRX24155182)   # SRX24155182
 
 # -------------------- Download & Convert --------------------
 
 # Download .sra files
-for r in "${youngminusd[@]}" "${youngplusd[@]}" "${senescentminusd[@]}" "${senescentplud[@]}"; do
+for r in "${ECC1_L1[@]}" "${ECC1_L1[@]}" "${H460_L1[@]}" "${H460_L1[@]}" "${PC-3_L1[@]}" "${PC-3_L2[@]}" "$PC_3_L2_siD[@]}" "${PC_3_L2_siD[@]}"; do
   prefetch "$r"
 done
 
 # Convert to gzipped FASTQ
-for r in "${youngminusd[@]}" "${youngplusd[@]}" "${senescentminusd[@]}" "${senescentplud[@]}"; do
+
+for r in "${ECC1_L1[@]}" "${ECC1_L1[@]}" "${H460_L1[@]}" "${H460_L1[@]}" "${PC-3_L1[@]}" "${PC-3_L2[@]}" "$PC_3_L2_siD[@]}" "${PC_3_L2_siD[@]}"; do
   fasterq-dump -e 16 -p -O . "$r"
   gzip -f "${r}.fastq"
 done
 
 # Concatenate per-sample FASTQs
-cat "${youngminusd[@]/%/.fastq.gz}"  > ym.fastq.gz
-cat "${youngplusd[@]/%/.fastq.gz}"  > yp.fastq.gz
-cat "${senescentminusd[@]/%/.fastq.gz}" > sm.fastq.gz
-cat "${senescentplusd[@]/%/.fastq.gz}" > sp.fastq.gz
+cat "${ECC1_L1[@]/%/.fastq.gz}"  > ECC1_L1.fastq.gz
+cat "${ECC1_L2[@]/%/.fastq.gz}"  > ECC1_L2.fastq.gz
+cat "${H460_L1[@]/%/.fastq.gz}" > H460_L1.fastq.gz
+cat "${H460_L2[@]/%/.fastq.gz}" > H460_L2.fastq.gz
+cat "${PC-3_L1[@]/%/.fastq.gz}"  > PC-3_L1.fastq.gz
+cat "${PC-3_L2[@]/%/.fastq.gz}"  > PC-3_L2.fastq.gz
+cat "${PC_3_L1_siD[@]/%/.fastq.gz}" > PC_3_L1_siD.fastq.gz
+cat "${PC_3_L2_siD[@]/%/.fastq.gz}" > PC_3_L2_siD.fastq.gz
 
 # Move to fastq/ folder
-mv Hyp*.fastq.gz Norm*.fastq.gz ../fastq/
+mv ECC1*.fastq.gz H460*.fastq.gz PC_3*.fastq.gz ../fastq/
 
 # -------------------- QC --------------------
 
 cd ../fastq
-fastqc ym.fastq.gz yp.gz sm.fastq.gz sp.fastq.gz \
+fastqc ECC1_L1.fastq.gz ECC1_L2.fastq.gz H460_L1.fastq.gz H460_L2.fastq.gz PC-3_L1.fastq.gz PC-3_L2.fastq.gz PC_3_L1_siD.fastq.gz PC_3_L2_siD.fastq.gz \
   -o ../qc --threads 16
 
 # -------------------- Alignment (STAR) --------------------
@@ -61,7 +70,7 @@ mdkir -p $GENOMEDIR/STAR
 STAR --runThreadN 23 --runMode genomeGenerate --genomeDir $GENOMEDIR/STAR --genomeFastaFiles $GENOMEDIR/GRCh38.primary_assembly.genome.fa --sjdbGTFfile $GENOMEDIR/gencode.v29.primary_assembly.annotation.gtf
 cd ../trimmed
 STAR --genomeDir indexes/chr10 \
-      --readFilesIn ym.fastq.gz yp.fastq.gz sm.fastq.gz sp.fastq.gz \
+      --readFilesIn ECC1_L1.fastq.gz ECC1_L2.fastq.gz H460_L1.fastq.gz H460_L2.fastq.gz PC-3_L1.fastq.gz PC-3_L2.fastq.gz PC_3_L1_siD.fastq.gz PC_3_L2_siD.fastq.gz  \
       --readFilesCommand zcat \
       --outSAMtype BAM SortedByCoordinate \
       --quantMode GeneCounts \
@@ -70,12 +79,12 @@ STAR --genomeDir indexes/chr10 \
 # -------------------- Quantification (featureCounts) --------------------
 
 cd ..
-curl -L -o gencode.v48.annotation.gtf.gz \
-  https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.annotation.gtf.gz
-gunzip -f gencode.v48.annotation.gtf.gz
+curl -L -o gencode.v16.annotation.gtf.gz \
+  https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v16.annotation.gtf.gz
+gunzip -f gencode.v16.annotation.gtf.gz
 
 featureCounts -T 16 -t exon -g gene_name \
-  -a gencode.v48.annotation.gtf \
+  -a gencode.v16.annotation.gtf \
   -o counts/raw_counts_gene_sym.txt aligned/*.bam \
   &> logs/featureCounts_gene_sym.log
 
