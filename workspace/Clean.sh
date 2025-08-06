@@ -91,7 +91,7 @@ featureCounts -T 16 -t exon -g gene_name \
 # Format counts matrix
 { printf "GeneSymbol\t"; head -n 2 counts/raw_counts_gene_sym.txt | tail -n 1 | cut -f7-; } > counts/final_counts_symbols.tsv
 tail -n +3 counts/raw_counts_gene_sym.txt | \
-  awk -v OFS="\t" '{ out=$1; for(i=7;i<=NF;i++) out=out OFS $i; print out }' >> counts/final_counts_symbols.tsv
+  awk -v OFS="\t" '{ out=$1; for(i=7;i<=NF;i++) out=out OFS $i; print out }' >> Processed_counts/final_counts_symbols.tsv
 
 sed -i '' '1 s|aligned/||g; 1 s|\.bam||g' counts/final_counts_symbols.tsv
 
