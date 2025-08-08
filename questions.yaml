@@ -35,7 +35,7 @@ questions:\
 \
   - id: q4\
     stage: differential_expression\
-    text: "Which gene is the 1st deregulated by log2 fold change (most upregulated) for ECC-1?"\
+    text: "Which gene is the 2nd deregulated by log2 fold change (most upregulated) for ECC-1?"\
     answer_type: integer_exact\
 \
   - id: q5\
