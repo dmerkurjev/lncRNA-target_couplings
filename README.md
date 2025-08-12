@@ -9,7 +9,7 @@ PCR. The resulting sgRNA pools were delivered by electroporation to HEK293T cell
 It includes two main components: 
 
 Preprocessing (Clean.sh)
-Downloads SRA runs, builds 4 sample FASTQs, performs QC, alignment, and outputs gene transcription level.
+Downloads SRA runs, builds 8 sample FASTQs, performs QC, alignment, and outputs gene transcription level.
 
 Analysis (Differential_expression.sh)
 Performs differential expression analysis using edgeR.
