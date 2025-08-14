@@ -36,7 +36,7 @@ questions:\
   - id: q4\
     stage: differential_expression\
     text: "Which gene is the 2nd deregulated by log2 fold change (most upregulated) for ECC-1?"\
-    answer_type: integer_exact\
+    answer_type: string_exact\
 \
   - id: q5\
     stage: differential_expression\
