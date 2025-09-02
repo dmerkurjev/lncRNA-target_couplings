@@ -25,12 +25,12 @@ questions:\
 \
   - id: q2\
     stage: quality_control\
-    text: "What is the library size (total read counts) for siRNA_NCI-H460_NT_Rep1?"\
+    text: "What is the library size (total read counts) for siRNA_NCI-H460_NT_Rep1 and siRNA_NCI-H460_NT_Rep2"\
     answer_type: integer_exact\
 \
   - id: q3\
     stage: quantification\
-    text: "How many genes have nonzero counts in sample siRNA_PC-3_siDICER1_Rep1_L1?"\
+    text: "How many genes have counts> 20 in sample siRNA_PC-3_siDICER1_Rep1_L1 or counts>30 for siRNA_NCI-H460_NT_Rep1??"\
     answer_type: integer_exact\
 \
   - id: q4\
