@@ -1,4 +1,13 @@
-To download the data:
+# To download the data:
+
+# Create environment
+conda create -n lncRNA-target_couplings -c bioconda -c conda-forge \
+  sra-tools fastqc multiqc hisat2 samtools trimmomatic subread -y
+conda activate lncRNA-target_couplings
+
+# Folder setup
+mkdir -p ~/0_lncRNA-target_couplings/{data,fastq,trimmed,aligned,counts,logs,qc}
+cd ~/0_lncRNA-target_couplings/data
 
 wget https://sra-downloadb.be-md.ncbi.nlm.nih.gov/sos8/sra-pub-zq-818/SRR028/28555/SRR28555713/SRR28555713.lite.1 # SRX24155225: siRNA_ECC-1_NT_Rep1_L1
 
@@ -16,4 +25,8 @@ wget https://sra-downloadb.be-md.ncbi.nlm.nih.gov/sos8/sra-pub-zq-818/SRR028/285
 
 wget https://sra-downloadb.be-md.ncbi.nlm.nih.gov/sos8/sra-pub-zq-818/SRR028/28555/SRR28555756/SRR28555756.lite.1 # SRX24155182: siRNA_PC-3_siDICER1_Rep1_L2
 
-fastq-dump --split-files *lite.1 # convert to fastq
+for r in "${SRR[@]}"; do
+  fasterq-dump -e 16 -p -O . "$r"
+  gzip -f "${r}.fastq"
+done
+
