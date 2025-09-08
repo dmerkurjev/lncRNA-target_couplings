@@ -14,7 +14,7 @@ libsize <- colSums(counts)
 ans_q2 <- unname(libsize["H460_L1"])+ unname(libsize["H460_L2"])
 
 # q3: How many genes have counts> 20 in sample siRNA_PC-3_siDICER1_Rep1_L1 or counts>30 for siRNA_NCI-H460_NT_Rep1?
-ans_q3 <- sum(counts[, "PC_3_L1_siD"] > 0)
+ans_q3 <- sum(counts[, "PC_3_L1_siD"] > 20)+ sum(counts[, "siRNA_NCI-H460_NT_Rep1"] > 30)
 
 # q4: Which gene is the 1st deregulated by log2 fold change (most upregulated) for ECC-1??
 res_df$SYMBOL <- rownames(res_df)
